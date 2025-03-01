@@ -4,7 +4,7 @@
   "name": "material-dark-theme",
   "displayName": "Material Dark Theme by P4BL1SK1",
   "description": "Dark Theme with Material palette colors",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/material-dark-theme/material-dark-theme.git"
@@ -12,15 +12,150 @@
   "engines": {
     "vscode": "^1.97.0"
   },
+  "icon": "logo.png",
+  "galleryBanner": {
+    "color": "#11131C",
+    "theme": "dark"
+  },
+  "scripts": {
+    "build": "run-s cleanup build:ts build:generate-themes build:ui obfs",
+    "cleanup": "rimraf build && rimraf dist",
+    "lint": "eslint .",
+    "build:ui": "node dist/scripts/ui/index.js",
+    "build:generate-themes": "node dist/scripts/generator/index.js",
+    "build:ts": "tsc -p ./tsconfig.json && ncp dist/src/ build && ncp material-theme.config.json build",
+    "obfs": "run-s obfs:build obfs:dist",
+    "obfs:build": "javascript-obfuscator ./build --output ./build --compact true --control-flow-flattening true --options-preset high-obfuscation",
+    "obfs:dist": "javascript-obfuscator ./dist --output ./dist --compact true --control-flow-flattening true --options-preset high-obfuscation",
+    "postinstall": "node ./node_modules/vscode/bin/install && tsc -p tsconfig.json",
+    "release": "git pull && standard-version && git push --follow-tags",
+    "release:patch": "git pull && standard-version --release-as patch && git push --follow-tags",
+    "release:major": "git pull && standard-version --release-as major && git push --follow-tags"
+  },
   "categories": [
     "Themes"
   ],
+  "keywords": [
+    "VSCode",
+    "Themes",
+    "Material"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "main": "./build/material.theme.config",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "contributes": {
+    "commands": [
+      {
+        "command": "materialTheme.setAccent",
+        "title": "Set accent color",
+        "category": "Material Theme"
+      },
+      {
+        "command": "materialTheme.showReleaseNotes",
+        "title": "Release Notes",
+        "category": "Material Theme"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Material Theme",
+      "properties": {
+        "materialTheme.accent": {
+          "type": "string",
+          "default": "Blue",
+          "enum": [
+            "Acid Lime",
+            "Blue",
+            "Breaking Bad",
+            "Bright Teal",
+            "Cyan",
+            "Graphite",
+            "Indigo",
+            "Lime",
+            "Orange",
+            "Pink",
+            "Purple",
+            "Red",
+            "Sky",
+            "Tomato",
+            "Teal",
+            "Yellow"
+          ],
+          "description": "Current accent color selected",
+          "scope": "window"
+        }
+      }
+    },
     "themes": [
       {
-        "label": "Material Dark Theme",
-        "uiTheme": "vs-dark",
-        "path": "./themes/Material Dark Theme-color-theme.json"
+        "label": "Material Theme",
+        "path": "./build/themes/Material-Theme-Default.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme High Contrast",
+        "path": "./build/themes/Material-Theme-Default-High-Contrast.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Darker",
+        "path": "./build/themes/Material-Theme-Darker.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Darker High Contrast",
+        "path": "./build/themes/Material-Theme-Darker-High-Contrast.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Palenight",
+        "path": "./build/themes/Material-Theme-Palenight.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Palenight High Contrast",
+        "path": "./build/themes/Material-Theme-Palenight-High-Contrast.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Ocean",
+        "path": "./build/themes/Material-Theme-Ocean.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Ocean High Contrast",
+        "path": "./build/themes/Material-Theme-Ocean-High-Contrast.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Deepforest",
+        "path": "./build/themes/Material-Theme-Deepforest.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme DeepForest High Contrast",
+        "path": "./build/themes/Material-Theme-Deepforest-High-Contrast.json",
+        "uiTheme": "vs-dark"
+      },
+      {
+        "label": "Material Theme Lighter",
+        "path": "./build/themes/Material-Theme-Lighter.json",
+        "uiTheme": "vs"
+      },
+      {
+        "label": "Material Theme Lighter High Contrast",
+        "path": "./build/themes/Material-Theme-Lighter-High-Contrast.json",
+        "uiTheme": "vs"
       }
     ]
   }
