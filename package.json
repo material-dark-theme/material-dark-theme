@@ -3,6 +3,10 @@
   "displayName": "Material Dark Theme",
   "description": "Dark Theme with Material palette colors",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/material-dark-theme/material-dark-theme.git"
+  },
   "engines": {
     "vscode": "^1.97.0"
   },
