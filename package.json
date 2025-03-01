@@ -2,9 +2,14 @@
   "author": "P4BL1SK1",
   "publisher": "P4BL1SK1",
   "name": "material-dark-theme",
-  "displayName": "Material Dark Theme by P4BL1SK1",
-  "description": "Dark Theme with Material palette colors",
+  "displayName": "Dark Theme with Material design palette colors",
+  "description": "Dark Theme with Material design palette colors",
   "version": "0.0.1",
+  "icon": "logo.png",
+  "galleryBanner": {
+    "color": "#11131C",
+    "theme": "dark"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/material-dark-theme/material-dark-theme.git"
