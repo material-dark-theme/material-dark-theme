@@ -4,8 +4,11 @@
   "name": "material-dark-theme",
   "displayName": "Dark Theme with Material design palette colors",
   "description": "Dark Theme with Material design palette colors",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icon": "logo.png",
+  "scripts": {
+    "build": "vsce package"
+  },
   "galleryBanner": {
     "color": "#11131C",
     "theme": "dark"
@@ -15,7 +18,7 @@
     "url": "https://github.com/material-dark-theme/material-dark-theme.git"
   },
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.0.0"
   },
   "categories": [
     "Themes"
